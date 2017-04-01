@@ -1,6 +1,21 @@
-==========================
+============================
 
+ * Added support for WinRT.
+ * Added support for classical music tags of iTunes 12.5.
+ * Dropped support for Windows 9x and NT 4.0 or older.
+ * Fixed reading MP4 atoms with zero length.
+ * Fixed handling of lowercase field names in Vorbis Comments.
+ * Fixed possible file corruptions when saving Ogg files.
+ * Fixed reading FLAC files with zero-sized seektables.
+ * Better handling of invalid UTF-8 sequences.
+ * Several smaller bug fixes and performance improvements.
+
+TagLib 1.11.1 (Oct 24, 2016)
+============================
+
+ * Fixed binary incompatible change in TagLib::String.
  * Fixed reading ID3v2 CTOC frames with a lot of entries.
+ * Fixed seeking ByteVectorStream from the end.
 
 TagLib 1.11 (Apr 29, 2016)
 ==========================
