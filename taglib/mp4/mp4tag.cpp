@@ -74,11 +74,12 @@ MP4::Tag::Tag(TagLib::File *file, MP4::Atoms *atoms) :
             atom->name == "hdvd" || atom->name == "shwm") {
       parseBool(atom);
     }
-    else if(atom->name == "tmpo" || atom->name == "\251mvi" || atom->name == "\251mvc") {
+    else if(atom->name == "tmpo" || atom->name == "rate" || atom->name == "\251mvi" || atom->name == "\251mvc") {
       parseInt(atom);
     }
     else if(atom->name == "tvsn" || atom->name == "tves" || atom->name == "cnID" ||
-            atom->name == "sfID" || atom->name == "atID" || atom->name == "geID") {
+            atom->name == "sfID" || atom->name == "atID" || atom->name == "geID" ||
+            atom->name == "cmID") {
       parseUInt(atom);
     }
     else if(atom->name == "plID") {
@@ -92,6 +93,9 @@ MP4::Tag::Tag(TagLib::File *file, MP4::Atoms *atoms) :
     }
     else if(atom->name == "covr") {
       parseCovr(atom);
+    }
+    else if(atom->name == "purl" || atom->name == "egid") {
+      parseText(atom, -1);
     }
     else {
       parseText(atom);
@@ -476,11 +480,12 @@ MP4::Tag::save()
             name == "shwm") {
       data.append(renderBool(name.data(String::Latin1), it->second));
     }
-    else if(name == "tmpo" || name == "\251mvi" || name == "\251mvc") {
+    else if(name == "tmpo" || name == "rate" || name == "\251mvi" || name == "\251mvc") {
       data.append(renderInt(name.data(String::Latin1), it->second));
     }
     else if(name == "tvsn" || name == "tves" || name == "cnID" ||
-            name == "sfID" || name == "atID" || name == "geID") {
+            name == "sfID" || name == "atID" || name == "geID" ||
+            name == "cmID") {
       data.append(renderUInt(name.data(String::Latin1), it->second));
     }
     else if(name == "plID") {
@@ -491,6 +496,9 @@ MP4::Tag::save()
     }
     else if(name == "covr") {
       data.append(renderCovr(name.data(String::Latin1), it->second));
+    }
+    else if(name == "purl" || name == "egid") {
+      data.append(renderText(name.data(String::Latin1), it->second, TypeImplicit));
     }
     else if(name.size() == 4){
       data.append(renderText(name.data(String::Latin1), it->second));
